@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot name="pantographe" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find pantographe_description)/urdf/pantographe_macros.urdf.xacro"/>
+
+  <!-- Base Link -->
+  <xacro:pantographe_base_link/>
+
+  <!-- Four arms (4 links) for a 5-bar with base -->
+  <xacro:pantographe_arm link_name="arm_1" parent_link="base_link" joint_name="joint_1" length="0.5"/>
+  <xacro:pantographe_arm link_name="arm_2" parent_link="arm_1" joint_name="joint_2" length="0.5"/>
+  <xacro:pantographe_arm link_name="arm_3" parent_link="arm_2" joint_name="joint_3" length="0.5"/>
+  <xacro:pantographe_arm link_name="arm_4" parent_link="arm_3" joint_name="joint_4" length="0.5"/>
+
+  <!-- End Effector fixed on joint_2 (attached to arm_2) -->
+  <xacro:pantographe_end_effector parent_link="arm_2" joint_name="joint_ee"/>
+
+</robot>
