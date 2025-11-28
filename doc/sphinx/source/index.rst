@@ -23,6 +23,7 @@ Table des matières
 
    p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index
    p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index
+   p02_URDF_and_robot_description/p52s00_index
 
 
 **************************
