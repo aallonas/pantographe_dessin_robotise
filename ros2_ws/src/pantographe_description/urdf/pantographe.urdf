@@ -1,18 +1,33 @@
 <?xml version="1.0"?>
 <robot name="pantographe" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <!--
+    Xacro entry for the pantographe model.
+    Links: base, link1, link2, link3, link4
+    Meshes expected at: package://pantographe_description/meshes/base.dae and link1.dae..link4.dae
+
+    Notes:
+    - All joints are revolute about the Y axis.
+    - There are 5 joints forming a closed chain: joint1(base->link1), joint2(link1->link2),
+      joint3(link2->link3), joint4(link3->link4), joint5(link4->base).
+    - URDF does not natively support closed kinematic loops for all ROS tooling (robot_state_publisher expects a tree).
+      This file will generate a URDF with a closing joint (joint5). If you need a tree, consider breaking the loop
+      and publishing the dependent joint(s) at runtime or use mimic tags when appropriate.
+  -->
+
   <xacro:include filename="$(find pantographe_description)/urdf/pantographe_macros.urdf.xacro"/>
 
-  <!-- Base Link -->
-  <xacro:pantographe_base_link/>
+  <!-- links:  -->
+  <xacro:link_with_mesh name="base"  mesh="bati_asm_4.stl"  mass="2.0"  ixx="0.02" iyy="0.02" izz="0.02"/>
+  <xacro:link_with_mesh name="link1" mesh="link1_asm_1.stl" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
+  <xacro:link_with_mesh name="link2" mesh="link2_asm_2.stl" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
+  <xacro:link_with_mesh name="link3" mesh="link3_asm_1.stl" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
+  <xacro:link_with_mesh name="link4" mesh="link4_asm_2.stl" mass="0.5"  ixx="0.005" iyy="0.005" izz="0.005"/>
 
-  <!-- Four arms (4 links) for a 5-bar with base -->
-  <xacro:pantographe_arm link_name="arm_1" parent_link="base_link" joint_name="joint_1" length="0.5"/>
-  <xacro:pantographe_arm link_name="arm_2" parent_link="arm_1" joint_name="joint_2" length="0.5"/>
-  <xacro:pantographe_arm link_name="arm_3" parent_link="arm_2" joint_name="joint_3" length="0.5"/>
-  <xacro:pantographe_arm link_name="arm_4" parent_link="arm_3" joint_name="joint_4" length="0.5"/>
-
-  <!-- End Effector fixed on joint_2 (attached to arm_2) -->
-  <xacro:pantographe_end_effector parent_link="arm_2" joint_name="joint_ee"/>
+  <!-- joints: revolute about y. origins mesured in cad -->
+  <xacro:revolute_joint name="joint1" parent="base"  child="link1" xyz="-0.080 0 0.070" rpy="0 0 0" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+  <xacro:revolute_joint name="joint2" parent="link1" child="link2" xyz="0 0 0" rpy="0 0 0" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+  <xacro:revolute_joint name="joint3" parent="link2" child="link3" xyz="0 0 0" rpy="0 0 0" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+  <xacro:revolute_joint name="joint4" parent="link3" child="link4" xyz="0 0 0" rpy="0 0 0" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
 
 </robot>

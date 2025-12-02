@@ -1,63 +1,53 @@
 #!/usr/bin/env python3
+"""
+Launch file for pantographe robot visualization.
+Starts robot_state_publisher, joint_state_publisher_gui, and rviz2.
+"""
 
 import os
-from pathlib import Path
-
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
 
     pkg_path = get_package_share_directory('pantographe_description')
-    urdf_path = os.path.join(pkg_path, 'urdf', 'pantographe.urdf')
-
-    # Optional RViz config
+    urdf_path = os.path.join(pkg_path, 'urdf', 'pantographe_generated.urdf')
     rviz_config_path = os.path.join(pkg_path, 'rviz', 'view.rviz')
 
-    use_gui = LaunchConfiguration("use_gui")
+    # Read URDF file
+    with open(urdf_path, 'r') as f:
+        robot_description = f.read()
 
     return LaunchDescription([
-
-        DeclareLaunchArgument(
-            name="use_gui",
-            default_value="true",
-            description="Use joint_state_publisher_gui"
+        # Robot State Publisher: publishes /tf and /tf_static from robot_description
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='robot_state_publisher',
+            output='screen',
+            parameters=[
+                {'robot_description': robot_description},
+                {'use_sim_time': False}
+            ]
         ),
 
-        # Joint State Publisher (GUI or non-GUI)
+        # Joint State Publisher GUI: allows manual joint control via sliders
         Node(
-            package="joint_state_publisher_gui",
-            executable="joint_state_publisher_gui",
-            condition=use_gui,
-            name="joint_state_publisher_gui"
+            package='joint_state_publisher_gui',
+            executable='joint_state_publisher_gui',
+            name='joint_state_publisher_gui',
+            output='screen'
         ),
 
+        # RViz2: visualization tool
         Node(
-            package="joint_state_publisher",
-            executable="joint_state_publisher",
-            condition=~use_gui,
-            name="joint_state_publisher"
-        ),
-
-        # Robot State Publisher
-        Node(
-            package="robot_state_publisher",
-            executable="robot_state_publisher",
-            name="robot_state_publisher",
-            parameters=[{"robot_description": open(urdf_path).read()}]
-        ),
-
-        # RViz
-        Node(
-            package="rviz2",
-            executable="rviz2",
-            name="rviz2",
-            output="screen",
-            arguments=["-d", rviz_config_path]
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            arguments=['-d', rviz_config_path] if os.path.exists(rviz_config_path) else []
         )
     ])
 
