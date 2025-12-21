@@ -8,17 +8,17 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+import xacro
 
 
 def generate_launch_description():
 
     pkg_path = get_package_share_directory('pantographe_description')
-    urdf_path = os.path.join(pkg_path, 'urdf', 'pantographe_generated.urdf')
+    xacro_path = os.path.join(pkg_path, 'urdf', 'pantographe.urdf')
     rviz_config_path = os.path.join(pkg_path, 'rviz', 'view.rviz')
 
-    # Read URDF file
-    with open(urdf_path, 'r') as f:
-        robot_description = f.read()
+    # Process xacro file directly
+    robot_description = xacro.process_file(xacro_path).toxml()
 
     return LaunchDescription([
         # Robot State Publisher: publishes /tf and /tf_static from robot_description
