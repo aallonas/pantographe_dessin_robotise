@@ -3,7 +3,7 @@
 <package format="3">
   <name>pantographe_description</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Description package for the pantographe robot model</description>
   <maintainer email="alexandre.allonas@gmail.com">aallonas01</maintainer>
   <license>TODO: License declaration</license>
 
