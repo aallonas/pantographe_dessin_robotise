@@ -1,5 +1,5 @@
 ###############################################
- Prérquis de la description URDF du pantographe
+ Prérequis de la description URDF du pantographe
 ###############################################
 
 Nous allons utiliser le modèle 3D au format step conçu et réalisé par M. Olivier PICCIN pour générer la description URDF du pantographe.
