@@ -42,5 +42,5 @@ construire les paquets
 
       echo "source ~/pantographe_dessin_robotise/ros2_ws/install/setup.bash" >> ~/.bashrc
 
-Pour plus d'informations sur la construction de paquets ROS 2, consultez la documentation officielle : `Building and Testing Your First ROS 2 Package <https://docs.ros.org/en/jazzy/Tutorials/Beginner-ROS2-Users/Building-Your-First-ROS2-Package.html>`_.
+Pour plus d'informations sur la construction de paquets ROS 2, consultez la documentation officielle : `ROS 2 Tutorials <https://docs.ros.org/en/jazzy/Tutorials.html>`_.
 
