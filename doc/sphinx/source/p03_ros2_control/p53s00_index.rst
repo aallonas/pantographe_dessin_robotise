@@ -1,6 +1,6 @@
-####################################
-Description du robot et fichier URDF
-####################################
+#################################
+Control du robot via ros2_control  
+#################################
 
 .. toctree::
    :maxdepth: 2
