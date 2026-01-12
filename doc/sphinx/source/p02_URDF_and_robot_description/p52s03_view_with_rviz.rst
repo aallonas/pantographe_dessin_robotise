@@ -1,10 +1,13 @@
-####################################
-Description du robot et fichier URDF
-####################################
+#######################
+Visualisation du modèle
+#######################
 
-.. toctree::
-   :maxdepth: 2
+Il est possible de visualiser le modèle issu du fichier URDF du pantographe à l'aide de RViz. Cet outil peut être utilisé pour vérifier la validité du modèle lui-même, c'est pourquoi nous l'avons exposé au travers d'une launch file qui traite automatiquement le fichier contenant les macros Xacro. Cette approche est destinée au développement ; ainsi en production, il faudra utiliser le fichier URDF généré pour éviter le gaspillage de ressources.
 
-   p52s01_hardware_description
-   p52s02_URDF
-   p52s03_visualisation_rviz
+Pour lancer la visualisation, utilisez la commande suivante :
+
+.. code-block:: bash
+
+   ros2 launch pantographe_description display.launch.py
+
+Vous pouvez ainsi vous assurer du bon placement des repères et d'autres paramètres.
