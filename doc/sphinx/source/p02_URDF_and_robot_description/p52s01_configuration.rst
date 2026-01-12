@@ -1,26 +1,6 @@
-###############################
-Description matérielle du robot
-###############################
-
-*************************
-Aperçu global du matériel
-*************************
-
-#. `Raspberry Pi 5 <https://www.raspberrypi.com/products/raspberry-pi-5/>`_
-
-   #. `Active Cooler <https://www.raspberrypi.com/products/active-cooler/>`_
-   #. `NVMe Base <https://shop.pimoroni.com/products/nvme-base?variant=41219587178579>`_
-   #. `SSD <https://www.adata.com/fr/consumer/category/ssds/solid-state-drives-legend-700/?tab=description>`_ (stockage)
-
-#. Maquette de pantographe
-
-   #. 2 moteurs Dynamixel `AX-12A <https://emanual.robotis.com/docs/en/dxl/ax/ax-12a/>`_
-   #. Convertisseur de communication USB `U2D2 <https://emanual.robotis.com/docs/en/parts/interface/u2d2/>`_
-   #. Alimentation Dynamixel 12 V
-
-****************************************
+########################################
 Configuration des servomoteurs Dynamixel
-****************************************
+########################################
 
 La configuration des servomoteurs Dynamixel est nécessaire pour leur utilisation, en particulier pour définir leur identifiant (ID) et leur vitesse de communication (baudrate).
 Pour ce faire, nous allons utiliser le logiciel `Dynamixel Wizard <https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_wizard2/>`_.
