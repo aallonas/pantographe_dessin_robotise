@@ -2,21 +2,26 @@
 Création du fichier URDF du robot
 #################################
 
-Le modèle URDF du robot pantographe est défini à l’aide d’un fichier **xacro** nommé
+.. warning::
+   **Fichier URDF non finalisé**
+   
+   Ce fichier URDF est encore en cours de développement. Il manque actuellement l'intégration des marqueurs **ros2_control** nécessaires pour l'interfaçage avec les contrôleurs matériels. Ces éléments seront ajoutés dans une version ultérieure de la documentation.
+
+Le modèle URDF du robot pantographe est défini à l'aide d'un fichier **xacro** nommé
 ``pantographe.urdf.xacro``, situé dans le package
 ``pantographe_description``.
 
-L’utilisation du format **xacro** permet de simplifier et de structurer la description
+L'utilisation du format **xacro** permet de simplifier et de structurer la description
 du robot en introduisant des **macros**, des **variables** et des **paramètres**,
 évitant ainsi la redondance inhérente à un fichier XML URDF statique.
 
-La documentation officielle de xacro est disponible à l’adresse suivante :
+La documentation officielle de xacro est disponible à l'adresse suivante :
 https://wiki.ros.org/xacro
 
 Principe des fichiers URDF et xacro
 ===================================
 
-Les fichiers **URDF** et **xacro** permettent de décrire la structure mécanique d’un
+Les fichiers **URDF** et **xacro** permettent de décrire la structure mécanique d'un
 robot en définissant :
 
 - des **liens rigides** (*links*),
@@ -25,11 +30,11 @@ robot en définissant :
   
   - les propriétés **visuelles**,
   - les volumes de **collision**,
-  - les paramètres **d’inertie**.
+  - les paramètres **d'inertie**.
 
-Afin d’améliorer la cohérence du modèle et de faciliter sa compréhension,
+Afin d'améliorer la cohérence du modèle et de faciliter sa compréhension,
 les fichiers de géométrie ont été **réexportés** de manière à corriger le placement
-des **origines** et l’orientation des **axes** de chaque lien.
+des **origines** et l'orientation des **axes** de chaque lien.
 
 Organisation des fichiers xacro
 ================================
@@ -41,7 +46,6 @@ La description du robot est divisée en plusieurs fichiers xacro :
   (liens, joints, transmissions, etc.).
 
 Exemple de fichier définissant les macros xacro :
-
 
 .. code-block:: xml
 
@@ -92,7 +96,6 @@ Exemple de fichier définissant les macros xacro :
 
 Exemple de fichier URDF principal utilisant les macros :
 
-
 .. code-block:: xml
    
       <?xml version="1.0"?>
@@ -142,9 +145,4 @@ suivante, exécutée dans un terminal situé à la racine de l'espace de travail
 Cette commande produit un fichier ``pantographe.urdf`` entièrement résolu,
 qui peut ensuite être utilisé par les outils ROS 2 tels que **RViz**,
 **robot_state_publisher** ou les simulateurs.
-
-
-
-
-
 
