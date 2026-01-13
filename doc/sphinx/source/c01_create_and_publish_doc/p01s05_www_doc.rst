@@ -50,6 +50,9 @@ Vous pouvez maintenant ajouter votre clé à l'agent ssh, cela vous évitera de 
 .. code-block:: bash
 
    ssh-agent /bin/bash
+
+.. code-block:: bash
+      
    ssh-add ~/.ssh/id_ed25519_info_indus_tutorial
 
 
