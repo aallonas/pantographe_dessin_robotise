@@ -16,10 +16,13 @@ Les paquets sources sont disponibles sur le dépôt GitHub suivant : `pantograph
    git clone https://github.com/aallonas/pantographe_dessin_robotise.git
 
 ***********************
-Télécharger les dépendances
+Présentation des paquets
 ***********************
 
-Pour faire fonctionner les paquets ROS 2, il est nécessaire d'installer certaines dépendances.
+- ``pantographe_description`` : description URDF/xacro du robot pantographe.
+- ``pantographe_hardware`` : interface matérielle ROS 2 pour le pantographe.
+- ``pantographe_controller`` : contrôleurs ROS 2 pour le pantographe.
+- ``pantographe_bringup`` : fichiers de lancement pour le pantographe.
 
 .. code-block:: bash
    cd ~/pantographe_dessin_robotise/ros2_ws/
