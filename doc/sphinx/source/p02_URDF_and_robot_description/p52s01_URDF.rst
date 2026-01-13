@@ -126,7 +126,7 @@ Exemple de fichier URDF principal utilisant les macros :
      <xacro:revolute_joint name="joint1" parent="base"  child="link1" xyz="-0.0800 0.0320 0.0700" rpy="-1.57079 1.57079 0" axis="0 0 1" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
      <xacro:revolute_joint name="joint5" parent="base" child="link4" xyz="0.0580 0.0320 0.0700" rpy="-1.57079 1.57079 0" axis="0 0 1" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
      <xacro:revolute_joint name="joint2" parent="link1" child="link2" xyz="0.0800 0.0000 0.0540" rpy="1.57079632679 0 3.14159" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
-     <xacro:revolute_joint name="joint4" parent="link4" child="link3" xyz="0.0790 0.0000 0.0530" rpy="-1.57079 0 3.14159" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
+     <xacro:revolute_joint name="joint4" parent="link4" child="link3" xyz="0.0790 0.0000 0.0530" rpy="-1.57079 0 $(radians(180))" axis="0 1 0" lower="-3.1416" upper="3.1416" effort="10" velocity="5"/>
    
    </robot>
 
