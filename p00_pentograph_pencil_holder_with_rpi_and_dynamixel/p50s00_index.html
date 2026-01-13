@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pantographe de dessin robotisé avec Raspberry Pi et ROS2 &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -58,16 +58,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../c03_test_your_code/p03s00_index.html">Tester le code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<p class="caption" role="heading"><span class="caption-text">Projet Pantographe Robotisé</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="p50s01_material_description.html">Description du matériel de la plateforme pantographe</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p50s02_mechanical_description.html">Description mécanique de la plateforme pantographe</a></li>
-<li class="toctree-l2"><a class="reference internal" href="p50s03_urdf.html">Génération de la description URDF du pantographe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p50s03_urdf.html">Prérequis de la description URDF du pantographe</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description-du-projet">Description du projet</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p02_URDF_and_robot_description/p52s00_index.html">Description du robot et fichier URDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p03_ros2_control/p53s00_index.html">Control du robot via ros2_control</a></li>
 </ul>
 
         </div>
@@ -98,9 +100,12 @@
 <h1>Pantographe de dessin robotisé avec Raspberry Pi et ROS2<a class="headerlink" href="#pantographe-de-dessin-robotise-avec-raspberry-pi-et-ros2" title="Lien vers cette rubrique"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="p50s01_material_description.html">Description du matériel de la plateforme pantographe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p50s01_material_description.html">Description du matériel de la plateforme pantographe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p50s01_material_description.html#apercu-global-du-materiel">Aperçu global du matériel</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="p50s02_mechanical_description.html">Description mécanique de la plateforme pantographe</a></li>
-<li class="toctree-l1"><a class="reference internal" href="p50s03_urdf.html">Génération de la description URDF du pantographe</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="p50s03_urdf.html">Prérequis de la description URDF du pantographe</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="p50s03_urdf.html#extraction-des-modeles-3d-en-step">Extraction des modèles 3D en step</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p50s03_urdf.html#conversion-des-modeles-3d-en-collada">Conversion des modèles 3D en collada</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p50s03_urdf.html#creation-du-fichier-urdf">Création du fichier URDF</a></li>

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Table des matières &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -57,10 +57,12 @@
 <li class="toctree-l1"><a class="reference internal" href="c03_test_your_code/p03s00_index.html">Tester le code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<p class="caption" role="heading"><span class="caption-text">Projet Pantographe Robotisé</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p02_URDF_and_robot_description/p52s00_index.html">Description du robot et fichier URDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="p03_ros2_control/p53s00_index.html">Control du robot via ros2_control</a></li>
 </ul>
 
         </div>
@@ -164,12 +166,15 @@
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<p class="caption" role="heading"><span class="caption-text">Projet Pantographe Robotisé</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s01_material_description.html">Description du matériel de la plateforme pantographe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s01_material_description.html">Description du matériel de la plateforme pantographe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s01_material_description.html#apercu-global-du-materiel">Aperçu global du matériel</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s02_mechanical_description.html">Description mécanique de la plateforme pantographe</a></li>
-<li class="toctree-l2"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s03_urdf.html">Génération de la description URDF du pantographe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s03_urdf.html">Prérequis de la description URDF du pantographe</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s03_urdf.html#extraction-des-modeles-3d-en-step">Extraction des modèles 3D en step</a></li>
 <li class="toctree-l3"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s03_urdf.html#conversion-des-modeles-3d-en-collada">Conversion des modèles 3D en collada</a></li>
 <li class="toctree-l3"><a class="reference internal" href="p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s03_urdf.html#creation-du-fichier-urdf">Création du fichier URDF</a></li>
@@ -188,6 +193,40 @@
 <li class="toctree-l3"><a class="reference internal" href="p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s02_installation_of_ros2.html#sources-documentaires">Sources documentaires</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s03_build_repo_from_source.html">Télécharger les paquets et dépendances</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s03_build_repo_from_source.html#telecharger-les-paquets">Télécharger les paquets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s03_build_repo_from_source.html#presentation-des-paquets">Présentation des paquets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s03_build_repo_from_source.html#construire-les-paquets">construire les paquets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="p02_URDF_and_robot_description/p52s00_index.html">Description du robot et fichier URDF</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p02_URDF_and_robot_description/p52s01_URDF.html">Création du fichier URDF du robot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="p02_URDF_and_robot_description/p52s01_URDF.html#principe-des-fichiers-urdf-et-xacro">Principe des fichiers URDF et xacro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p02_URDF_and_robot_description/p52s01_URDF.html#organisation-des-fichiers-xacro">Organisation des fichiers xacro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p02_URDF_and_robot_description/p52s01_URDF.html#generation-du-fichier-urdf">Génération du fichier URDF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="p02_URDF_and_robot_description/p52s02_view_with_rviz.html">Visualisation du modèle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="p03_ros2_control/p53s00_index.html">Control du robot via ros2_control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="p03_ros2_control/p53s01_architecture.html">Architecture ros2_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03_ros2_control/p53s02_configuration.html">Configuration des servomoteurs Dynamixel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p03_ros2_control/p53s03_driver.html">Driver Dynamixel AX-12A</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="p03_ros2_control/p53s03_driver.html#architecture-du-driver">Architecture du driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p03_ros2_control/p53s03_driver.html#methodes-principales">Méthodes principales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p03_ros2_control/p53s03_driver.html#exemple-d-utilisation">Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p03_ros2_control/p53s03_driver.html#limitations-actuelles">Limitations actuelles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="p03_ros2_control/p53s03_driver.html#ameliorations-futures">Améliorations futures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="p03_ros2_control/p53s04_hardware_interface.html">Interface matérielle (Hardware Interface)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="p03_ros2_control/p53s04_hardware_interface.html#cycle-de-vie-lifecycle">Cycle de vie (Lifecycle)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="p03_ros2_control/p53s05_controllers.html">Contrôleurs</a></li>
 </ul>
 </li>
 </ul>

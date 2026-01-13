@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driver Dynamixel AX-12A &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fdcf8bf8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Interface matérielle (Hardware Interface)" href="p53s04_hardware_interface.html" />
+    <link rel="prev" title="Configuration des servomoteurs Dynamixel" href="p53s02_configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cours d'Informatique Industrielle avec ROS2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informatique Industrielle &amp; ROS2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../c00_introduction/p00s00_index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c01_create_and_publish_doc/p01s00_index.html">Premier projet &amp; doc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c03_test_your_code/p03s00_index.html">Tester le code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Projet Pantographe Robotisé</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p02_URDF_and_robot_description/p52s00_index.html">Description du robot et fichier URDF</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="p53s00_index.html">Control du robot via ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p53s01_architecture.html">Architecture ros2_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p53s02_configuration.html">Configuration des servomoteurs Dynamixel</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Driver Dynamixel AX-12A</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#architecture-du-driver">Architecture du driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parametres-de-configuration">Paramètres de configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#table-de-controle">Table de contrôle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conversions-d-unites">Conversions d’unités</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#methodes-principales">Méthodes principales</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialisation">Initialisation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#activation-du-moteur">Activation du moteur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#desactivation-du-moteur">Désactivation du moteur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#controle-de-position">Contrôle de position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lecture-de-position">Lecture de position</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#exemple-d-utilisation">Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations-actuelles">Limitations actuelles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ameliorations-futures">Améliorations futures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="p53s04_hardware_interface.html">Interface matérielle (Hardware Interface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p53s05_controllers.html">Contrôleurs</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cours d'Informatique Industrielle avec ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="p53s00_index.html">Control du robot via ros2_control</a></li>
+      <li class="breadcrumb-item active">Driver Dynamixel AX-12A</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/p03_ros2_control/p53s03_driver.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="driver-dynamixel-ax-12a">
+<h1>Driver Dynamixel AX-12A<a class="headerlink" href="#driver-dynamixel-ax-12a" title="Lien vers cette rubrique"></a></h1>
+<p>Nous avons développé un driver pour interfacer les servomoteurs Dynamixel AX-12A avec ROS 2. Pour ce faire, nous nous sommes basés sur l’exemple read_write fourni dans le <a class="reference external" href="https://github.com/ROBOTIS-GIT/DynamixelSDK/blob/main/c%2B%2B/example/protocol1.0/read_write/read_write.cpp">Dynamixel SDK</a>.</p>
+<p>Le code source de ce driver est disponible dans le package <strong>pantographe_hardware</strong> sous <code class="docutils literal notranslate"><span class="pre">include/pantographe_hardware/ax12a_driver.hpp</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ce driver est une implémentation basique qui ne supporte que le contrôle et la lecture de position des servomoteurs en mode joint (position control mode).</p>
+</div>
+<section id="architecture-du-driver">
+<h2>Architecture du driver<a class="headerlink" href="#architecture-du-driver" title="Lien vers cette rubrique"></a></h2>
+<p>Le driver <code class="docutils literal notranslate"><span class="pre">AX12ADriver</span></code> est une classe C++ qui encapsule des fonctionnalités du Dynamixel SDK pour simplifier l’utilisation des servomoteurs AX-12A.</p>
+<section id="parametres-de-configuration">
+<h3>Paramètres de configuration<a class="headerlink" href="#parametres-de-configuration" title="Lien vers cette rubrique"></a></h3>
+<p>Les paramètres suivants sont définis dans le fichier d’en-tête :</p>
+<ul class="simple">
+<li><p><strong>Protocole</strong> : Version 1.0</p></li>
+<li><p><strong>Baudrate</strong> : 115200 bps</p></li>
+<li><p><strong>Port série</strong> : <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code></p></li>
+</ul>
+</section>
+<section id="table-de-controle">
+<h3>Table de contrôle<a class="headerlink" href="#table-de-controle" title="Lien vers cette rubrique"></a></h3>
+<p>Le driver exploite les registres documentés dans le manuel des AX-12A dans la <a class="reference external" href="https://emanual.robotis.com/docs/en/dxl/ax/ax-12a/#control-table-of-eeprom-area">table de contrôle</a>.</p>
+</section>
+<section id="conversions-d-unites">
+<h3>Conversions d’unités<a class="headerlink" href="#conversions-d-unites" title="Lien vers cette rubrique"></a></h3>
+<p>Il convient de convertir les unités entre les radians utilisés dans ROS 2 et celles attendues par les servomoteurs Dynamixel AX-12A.</p>
+<ul class="simple">
+<li><p><strong>RAD_TO_DXL_POSITION</strong> : <code class="docutils literal notranslate"><span class="pre">195.37860814</span></code> (conversion radians → position Dynamixel)</p>
+<ul>
+<li><p>Plage : <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">300°]</span></code> → <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1023]</span></code></p></li>
+<li><p>Formule : <code class="docutils literal notranslate"><span class="pre">1023</span> <span class="pre">/</span> <span class="pre">(10π/6)</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bien que le driver ne support actuellement que le mode position, une méthode de conversion pour la lecture de vitesse peut être ajoutée aisément ultérieurement.</p>
+</div>
+</section>
+</section>
+<section id="methodes-principales">
+<h2>Méthodes principales<a class="headerlink" href="#methodes-principales" title="Lien vers cette rubrique"></a></h2>
+<section id="initialisation">
+<h3>Initialisation<a class="headerlink" href="#initialisation" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AX12ADriver</span><span class="w"> </span><span class="n">driver</span><span class="p">(</span><span class="s">&quot;/dev/ttyUSB0&quot;</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="n">init</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>La méthode <code class="docutils literal notranslate"><span class="pre">init()</span></code> :</p>
+<ol class="arabic simple">
+<li><p>Ouvre le port série spécifié</p></li>
+<li><p>Configure le baudrate à 115200 bps</p></li>
+<li><p>Retourne <code class="docutils literal notranslate"><span class="pre">0</span></code> en cas de succès, <code class="docutils literal notranslate"><span class="pre">-1</span></code> en cas d’erreur</p></li>
+</ol>
+</section>
+<section id="activation-du-moteur">
+<h3>Activation du moteur<a class="headerlink" href="#activation-du-moteur" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">driver</span><span class="p">.</span><span class="n">activateWithPositionMode</span><span class="p">(</span><span class="n">dxl_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Cette méthode :</p>
+<ol class="arabic simple">
+<li><p>Configure le moteur en mode position (joint mode) en définissant les limites d’angle CW à 0 et CCW à 1023</p></li>
+<li><p>Active le moteur (torque enable)</p></li>
+</ol>
+</section>
+<section id="desactivation-du-moteur">
+<h3>Désactivation du moteur<a class="headerlink" href="#desactivation-du-moteur" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">driver</span><span class="p">.</span><span class="n">deactivate</span><span class="p">(</span><span class="n">dxl_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Désactive le moteur.</p>
+</section>
+<section id="controle-de-position">
+<h3>Contrôle de position<a class="headerlink" href="#controle-de-position" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Définir une position cible en radians</span>
+<span class="n">driver</span><span class="p">.</span><span class="n">setTargetPositionRadian</span><span class="p">(</span><span class="n">dxl_id</span><span class="p">,</span><span class="w"> </span><span class="mf">1.57</span><span class="p">);</span><span class="w"> </span><span class="c1">// π/2 rad = 90°</span>
+</pre></div>
+</div>
+<p>Envoie une consigne de position au moteur. La conversion radians → unités Dynamixel est effectuée automatiquement.</p>
+</section>
+<section id="lecture-de-position">
+<h3>Lecture de position<a class="headerlink" href="#lecture-de-position" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Lire la position actuelle en radians</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="n">getPositionRadian</span><span class="p">(</span><span class="n">dxl_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Lit la position actuelle du moteur et la retourne en radians.</p>
+</section>
+</section>
+<section id="exemple-d-utilisation">
+<h2>Exemple d’utilisation<a class="headerlink" href="#exemple-d-utilisation" title="Lien vers cette rubrique"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cet exemple est issu du package <strong>dynamixel_test</strong> inclus dans le dépôt GitHub du projet. Il peut être compilé et exécuté pour tester le driver et les moteurs grace à la commande suivante:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/pantographe_dessin_robotise/ros2_ws
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>dynamixel_test
+ros2<span class="w"> </span>run<span class="w"> </span>dynamixel_test<span class="w"> </span>test_motors.cpp
+</pre></div>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;rclcpp/rclcpp.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dynamixel_test/ax12a_driver.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;thread&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">chrono_literals</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">dxl_id_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">dxl_id_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">   </span><span class="k">auto</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AX12ADriver</span><span class="p">(</span><span class="s">&quot;/dev/ttyUSB0&quot;</span><span class="p">);</span>
+<span class="w">   </span><span class="n">driver</span><span class="p">.</span><span class="n">init</span><span class="p">();</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">// Test motor position mode</span>
+<span class="w">   </span><span class="n">driver</span><span class="p">.</span><span class="n">activateWithPositionMode</span><span class="p">(</span><span class="n">dxl_id_1</span><span class="p">);</span>
+<span class="w">   </span><span class="n">driver</span><span class="p">.</span><span class="n">activateWithPositionMode</span><span class="p">(</span><span class="n">dxl_id_2</span><span class="p">);</span>
+<span class="w">   </span><span class="n">driver</span><span class="p">.</span><span class="n">setTargetPositionRadian</span><span class="p">(</span><span class="n">dxl_id_1</span><span class="p">,</span><span class="w"> </span><span class="mf">2.6</span><span class="p">);</span>
+<span class="w">   </span><span class="n">driver</span><span class="p">.</span><span class="n">setTargetPositionRadian</span><span class="p">(</span><span class="n">dxl_id_2</span><span class="p">,</span><span class="w"> </span><span class="mf">2.6</span><span class="p">);</span>
+
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">5</span><span class="n">s</span><span class="p">);</span>
+
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">pos1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="n">getPositionRadian</span><span class="p">(</span><span class="n">dxl_id_1</span><span class="p">);</span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">pos2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="n">getPositionRadian</span><span class="p">(</span><span class="n">dxl_id_2</span><span class="p">);</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Motor 1 position (rad): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pos1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Motor 2 position (rad): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pos2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">   </span><span class="n">driver</span><span class="p">.</span><span class="n">deactivate</span><span class="p">(</span><span class="n">dxl_id_1</span><span class="p">);</span>
+<span class="w">   </span><span class="n">driver</span><span class="p">.</span><span class="n">deactivate</span><span class="p">(</span><span class="n">dxl_id_2</span><span class="p">);</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cet exemple initialise deux servomoteurs AX-12A, les configure en mode position, leur envoie une consigne de position de 2.6 radians soit le milieu de la plage de rotation, attend 5 secondes, lit et affiche leurs positions actuelles, puis désactive les moteurs.</p>
+</div>
+</section>
+<section id="limitations-actuelles">
+<h2>Limitations actuelles<a class="headerlink" href="#limitations-actuelles" title="Lien vers cette rubrique"></a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Le driver présente les limitations suivantes :</p>
+<ul class="simple">
+<li><p><strong>Pas de contrôle de vitesse</strong> : Seul le mode position est implémenté</p></li>
+<li><p><strong>Pas de lecture de vitesse</strong> : La vitesse actuelle n’est pas accessible</p></li>
+<li><p><strong>Configuration matérielle figée</strong> : Le baudrate et les limites d’angle sont définis en dur</p></li>
+</ul>
+</div>
+</section>
+<section id="ameliorations-futures">
+<h2>Améliorations futures<a class="headerlink" href="#ameliorations-futures" title="Lien vers cette rubrique"></a></h2>
+<p>Les améliorations suivantes sont envisagées :</p>
+<ol class="arabic simple">
+<li><p>Lecture de la vitesse actuelle</p></li>
+<li><p>Configuration dynamique des paramètres (baudrate, limites)</p></li>
+<li><p>Contrôle de profil de vitesse pour des mouvements plus fluides</p></li>
+<li><p>Ajout du mode roue (wheel mode) pour rotation continue</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="p53s02_configuration.html" class="btn btn-neutral float-left" title="Configuration des servomoteurs Dynamixel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="p53s04_hardware_interface.html" class="btn btn-neutral float-right" title="Interface matérielle (Hardware Interface)" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Manuel YGUEL.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

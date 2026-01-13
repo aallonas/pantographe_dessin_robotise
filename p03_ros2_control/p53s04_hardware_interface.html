@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interface matérielle (Hardware Interface) &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fdcf8bf8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Contrôleurs" href="p53s05_controllers.html" />
+    <link rel="prev" title="Driver Dynamixel AX-12A" href="p53s03_driver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cours d'Informatique Industrielle avec ROS2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informatique Industrielle &amp; ROS2</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../c00_introduction/p00s00_index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c01_create_and_publish_doc/p01s00_index.html">Premier projet &amp; doc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c02_first_ros2_project_pimped/p02s00_index.html">Tutoriel ROS2 épicé</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c03_test_your_code/p03s00_index.html">Tester le code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Projet Pantographe Robotisé</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p02_URDF_and_robot_description/p52s00_index.html">Description du robot et fichier URDF</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="p53s00_index.html">Control du robot via ros2_control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="p53s01_architecture.html">Architecture ros2_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p53s02_configuration.html">Configuration des servomoteurs Dynamixel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p53s03_driver.html">Driver Dynamixel AX-12A</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interface matérielle (Hardware Interface)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cycle-de-vie-lifecycle">Cycle de vie (Lifecycle)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#methodes-principales">Méthodes principales</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="p53s05_controllers.html">Contrôleurs</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cours d'Informatique Industrielle avec ROS2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="p53s00_index.html">Control du robot via ros2_control</a></li>
+      <li class="breadcrumb-item active">Interface matérielle (Hardware Interface)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/p03_ros2_control/p53s04_hardware_interface.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interface-materielle-hardware-interface">
+<h1>Interface matérielle (Hardware Interface)<a class="headerlink" href="#interface-materielle-hardware-interface" title="Lien vers cette rubrique"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p><strong>Ce code n’a pas encore été testé ni validé.</strong>
+Il est a traiter en tant que tel et à manipuler avec la plus grande des précautions par des utilisateurs expérimentés uniquement.</p>
+</div>
+<p>L’interface matérielle <code class="docutils literal notranslate"><span class="pre">PantographeHardwareInterface</span></code> est le pont entre <strong>ros2_control</strong> et les servomoteurs Dynamixel AX-12A. Elle hérite de <code class="docutils literal notranslate"><span class="pre">hardware_interface::SystemInterface</span></code>.</p>
+<p>Code source : <code class="docutils literal notranslate"><span class="pre">include/pantographe_hardware/pantographe_hardware_interface.hpp</span></code> <code class="docutils literal notranslate"><span class="pre">src/pantographe_hardware_interface.cpp</span></code></p>
+<section id="cycle-de-vie-lifecycle">
+<h2>Cycle de vie (Lifecycle)<a class="headerlink" href="#cycle-de-vie-lifecycle" title="Lien vers cette rubrique"></a></h2>
+<p>L’interface utilise le modèle <strong>Lifecycle Node</strong> de ROS 2 pour une gestion sécurisée du matériel :</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Unconfigured → Configure → Inactive → Activate → Active
+                             ↑           ↓
+                             └─ Deactivate
+</pre></div>
+</div>
+<p>Voir la <a class="reference external" href="https://design.ros2.org/articles/node_lifecycle.html">documentation ROS 2 Lifecycle</a>.</p>
+<section id="methodes-principales">
+<h3>Méthodes principales<a class="headerlink" href="#methodes-principales" title="Lien vers cette rubrique"></a></h3>
+<dl class="simple">
+<dt><strong>on_init()</strong></dt><dd><p>Initialise le driver et les paramètres (IDs des moteurs, port série)</p>
+</dd>
+<dt><strong>on_configure()</strong></dt><dd><p>Ouvre la connexion série avec le convertisseur U2D2 (baudrate : 115200 bps)</p>
+</dd>
+<dt><strong>on_activate()</strong></dt><dd><p>Lit les positions initiales des moteurs et active le couple en mode position</p>
+</dd>
+<dt><strong>on_deactivate()</strong></dt><dd><p>Désactive le couple des moteurs (permet manipulation manuelle)</p>
+</dd>
+<dt><strong>read()</strong></dt><dd><p>Lit les positions actuelles des moteurs et met à jour les état_interfaces</p>
+</dd>
+<dt><strong>write()</strong></dt><dd><p>Envoie les consignes de position aux moteurs</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="p53s03_driver.html" class="btn btn-neutral float-left" title="Driver Dynamixel AX-12A" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="p53s05_controllers.html" class="btn btn-neutral float-right" title="Contrôleurs" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Manuel YGUEL.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

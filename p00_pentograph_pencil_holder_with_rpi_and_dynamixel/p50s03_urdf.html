@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Génération de la description URDF du pantographe &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
+  <title>Prérequis de la description URDF du pantographe &mdash; Documentation Cours d&#39;Informatique Industrielle avec ROS2 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -58,12 +58,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../c03_test_your_code/p03s00_index.html">Tester le code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../c04_collaborate_with_coders/p04s00_index.html">Les outils nécessaires pour collaborer entre codeurs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Travaux Pratiques</span></p>
+<p class="caption" role="heading"><span class="caption-text">Projet Pantographe Robotisé</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="p50s01_material_description.html">Description du matériel de la plateforme pantographe</a></li>
 <li class="toctree-l2"><a class="reference internal" href="p50s02_mechanical_description.html">Description mécanique de la plateforme pantographe</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Génération de la description URDF du pantographe</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prérequis de la description URDF du pantographe</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#extraction-des-modeles-3d-en-step">Extraction des modèles 3D en step</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conversion-des-modeles-3d-en-collada">Conversion des modèles 3D en collada</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creation-du-fichier-urdf">Création du fichier URDF</a></li>
@@ -73,6 +73,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../p01_rpi_ubuntu_as_a_ros2_robotic_platform/p51s00_index.html">Ubuntu &amp; RPi &amp; ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p02_URDF_and_robot_description/p52s00_index.html">Description du robot et fichier URDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../p03_ros2_control/p53s00_index.html">Control du robot via ros2_control</a></li>
 </ul>
 
         </div>
@@ -90,7 +92,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="p50s00_index.html">Pantographe de dessin robotisé avec Raspberry Pi et ROS2</a></li>
-      <li class="breadcrumb-item active">Génération de la description URDF du pantographe</li>
+      <li class="breadcrumb-item active">Prérequis de la description URDF du pantographe</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/p00_pentograph_pencil_holder_with_rpi_and_dynamixel/p50s03_urdf.rst.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
@@ -100,8 +102,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="generation-de-la-description-urdf-du-pantographe">
-<h1>Génération de la description URDF du pantographe<a class="headerlink" href="#generation-de-la-description-urdf-du-pantographe" title="Lien vers cette rubrique"></a></h1>
+  <section id="prerequis-de-la-description-urdf-du-pantographe">
+<h1>Prérequis de la description URDF du pantographe<a class="headerlink" href="#prerequis-de-la-description-urdf-du-pantographe" title="Lien vers cette rubrique"></a></h1>
 <p>Nous allons utiliser le modèle 3D au format step conçu et réalisé par M. Olivier PICCIN pour générer la description URDF du pantographe.</p>
 <figure class="align-center">
 <img alt="../_images/pantograph_step_model.png" src="../_images/pantograph_step_model.png" />
@@ -148,7 +150,12 @@ Il va donc falloir convertir notre modèle 3D au format step en un ensemble de 5
 </section>
 <section id="creation-du-fichier-urdf">
 <h2>Création du fichier URDF<a class="headerlink" href="#creation-du-fichier-urdf" title="Lien vers cette rubrique"></a></h2>
-<p>Dans un fichier URDF les modèles 3D sont référencés par des balises <code class="docutils literal notranslate"><span class="pre">&lt;mesh&gt;</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p><strong>Erreur importante dans les fichiers fournis</strong>
+Les fichiers URDF référence les maillages 3D par rapport au repère des liens. Il est donc crucial de vérifier et d’ajuster les positions et orientations des repères dans les fichiers 3D pour qu’ils puissent être intégrés correctement (aussi capitale pour le calcul des masses et inerties). Des erreurs dans ces repères peuvent entraîner des incohérences dans la visualisation et la simulation du robot.</p>
+<p>Pour ce faire nous recommandons de réexporter les fichiers 3D <strong>individuellement</strong>  en s’assurant qu’il sont bien reférencé par rapport au repère de la pièce (et non pas par rapport au repère global de l’assemblage).</p>
+</div>
 </section>
 </section>
 
